@@ -17,10 +17,21 @@ div.scrollable.tabs(id="tabs" percent-Height percent="100"  ng-style="style" ng-
                         table.table.table-striped.table-condensed.table-hover.ng-table-responsive(ng-table="tableParams" show-filter="false")
                             tr(ng-repeat="user in $data" )
                                 td.col-md-2(data-title="'User ID'" sortable="'teamUserId'") {{user.teamUserId}}
-                                td.col-md-4(data-title="'User Name (email address)'" sortable="'email'" filter="{ 'email': 'text' }") {{user.email}}
-                                td.col-md-2(data-title="'Team ID'" sortable="'teamId'") {{user.teamId}}
+                                td.col-md-4(data-title="'User Name (email address)'" sortable="'email'" filter="{ 'email': 'text' }")
+                                    span(ng-if="!user.$edit") {{user.email}}
+                                    div(ng-if="user.$edit")
+                                        input.form-control(type="text" ng-model="user.email" value="{{user.email}}" )
+                                td.col-md-2(data-title="'Team ID'" sortable="'teamId'")
+                                    span(ng-if="!user.$edit") {{user.teamId}}
+                                    div(ng-if="user.$edit")
+                                        select.form-control.span1.required(ng-model='user.teamId' ng-options="team.id as team.name for team in teams" class="ng-valid ng-dirty")
+                                            option(value="{{user.teamId}}" selected)
+
                                 td.col-md-2
                                     button.inputItem.btn.btn-primary.btn-xs.btn-danger.glyphicon.glyphicon-minus-sign(ng-click="removeUser(user)")
+                                    button.inputItem.btn.btn-primary.btn-xs.btn-danger.glyphicon.glyphicon-edit(ng-if="!user.$edit" ng-click="user.$edit=true")
+                                    button.inputItem.btn.btn-primary.btn-xs.btn-danger.glyphicon.glyphicon-save(ng-if="user.$edit" ng-click="editUser(user);user.$edit=false")
+
                             tr(ng-show='showAdd')
                                 td.col-md-2
                                 td.col-md-4

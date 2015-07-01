@@ -100,6 +100,19 @@ angular.module('NodeWebBase')
 
             };
 
+
+
+            $scope.editUser = function (user) {
+                if (!configurationService.isAppConfigured())
+                    return;
+                //user.id = user.teamUserId;
+                $http.post("/datawakeusers", user)
+                    .success(function (res) {
+                        changeUserMsg.broadcast();
+                    })
+                    .error(errorService.showError);
+            };
+
             $scope.updateUsers = function (){
                 $scope.getUsers();
             };
