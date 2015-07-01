@@ -1,0 +1,38 @@
+@import url("amino_base.css");
+
+.drop-box {
+    background: #C1FAA5;
+    border: 2px dashed #3e3f3a;
+    width: 200px;
+    height: auto;
+    text-align: center;
+    color: #006400;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    margin: 10px;
+}
+.dragover {
+    border: 2px dashed #86D65E;
+}
+
+.empty {
+    display:inline-block;
+    width: 12px;
+}
+
+.form-control{
+    border: 1px solid #CCC;
+    border-radius: 4px;
+    width: 100% !important;
+    outline: 0;
+}
+
+.nav-tabs > li.active > a,
+.nav-tabs > li.active > a:hover,
+.nav-tabs > li.active > a:focus {
+    color: #93c54b;
+    cursor: default;
+    background-color: #ffffff;
+    border: 1px solid #dddddd;
+    border-bottom-color: transparent;
+}

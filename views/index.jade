@@ -1,0 +1,27 @@
+extends layout
+
+block content
+    div(ng-controller='indexController')
+        .navbar.navbar-default
+            div.navbar-brand
+                span
+                    img(src='/img/waveicon.png' style="width:20px;height:20px")
+                span.navbar-brand-label &nbsp; Datawake Manager
+            div.navbar-right
+                logout
+                ao-settings
+    div(ng-view)
+
+block scripts
+    script(src='/javascripts/controllers/indexController.js')
+    script(src='/javascripts/component/logout/logout.js')
+    script(src='/javascripts/controllers/app/aminoMainController.js')
+    script(src='/javascripts/controllers/app/tabsController.js')
+    script(src='/javascripts/controllers/app/userTabController.js')
+    script(src='/javascripts/controllers/app/teamTabController.js')
+    script(src='/javascripts/controllers/app/domainTabController.js')
+    script(src='/javascripts/controllers/app/trailTabController.js')
+    script(src='/javascripts/controllers/app/domainEditController.js')
+
+
+

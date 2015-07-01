@@ -1,0 +1,139 @@
+div.scrollable.tabs(id="tabs" percent-Height percent="100"  ng-style="style" ng-controller="tabsController")
+
+    ul.nav.nav-tabs
+        li(ng-repeat="tab in tabs" ng-class="{active:isActiveTab(tab.url)}" ng-click="onClickTab(tab)")
+            a.glyphicon(ng-class="tab.icon", ng-show="tab.icon") {{tab.title}}
+
+    div( id="mainView" )
+        div.tab-content(id="controlBox")
+            div.tab(id="one.tpl.html" ng-class="{hidden:!isActiveTab('one.tpl.html')}")
+                div.col-md-12(ng-controller="userTabController")
+                    h2 Datawake Users&nbsp;&nbsp;
+                        button.inputItem.btn.btn-primary.btn-xs.btn-success(ng-click="showAdd = ! showAdd" title="Add New User")
+                            .glyphicon.glyphicon-plus-sign(ng-show="!showAdd")
+                            .glyphicon.glyphicon-minus-sign(ng-show="showAdd")
+                        button.inputItem.btn.btn-default.btn-xs.glyphicon.glyphicon-refresh(ng-controller="userTabController" ng-click="getUsers()" title="Refresh Users List")
+                    div
+                        table.table.table-striped.table-condensed.table-hover.ng-table-responsive(ng-table="tableParams" show-filter="false")
+                            tr(ng-repeat="user in $data" )
+                                td.col-md-2(data-title="'User ID'" sortable="'teamUserId'") {{user.teamUserId}}
+                                td.col-md-4(data-title="'User Name (email address)'" sortable="'email'" filter="{ 'email': 'text' }") {{user.email}}
+                                td.col-md-2(data-title="'Team ID'" sortable="'teamId'") {{user.teamId}}
+                                td.col-md-2
+                                    button.inputItem.btn.btn-primary.btn-xs.btn-danger.glyphicon.glyphicon-minus-sign(ng-click="removeUser(user)")
+                            tr(ng-show='showAdd')
+                                td.col-md-2
+                                td.col-md-4
+                                    input.form-control.span1.required(ng-model='data.email' placeholder="Email Address")
+                                td.col-md-2
+                                    select.form-control.span1.required(ng-model='data.teamId' ng-options="team.id as team.name for team in teams" class="ng-valid ng-dirty")
+                                        option(value="" disabled selected) Select Team
+                                td.col-md-2
+                                    button.btn.btn-sm.btn-success(ng-controller="userTabController" ng-click='addUser()') Add
+
+            div.tab( id="two.tpl.html" ng-class="{hidden:!isActiveTab('two.tpl.html')}")
+                div.col-md-12(ng-controller="teamTabController")
+                    h2 Datawake Teams&nbsp;&nbsp;
+                        button.inputItem.btn.btn-primary.btn-xs.btn-success(ng-click="showAdd = ! showAdd" title="Add New Team")
+                            .glyphicon.glyphicon-plus-sign(ng-show="!showAdd")
+                            .glyphicon.glyphicon-minus-sign(ng-show="showAdd")
+                        button.inputItem.btn.btn-default.btn-xs.glyphicon.glyphicon-refresh(ng-click="getTeams()" title="Refresh Teams List")
+                    div
+                        table.table.table-striped.table-condensed.table-hover.ng-table-responsive(ng-table="tableParams" show-filter="true")
+                            tr(ng-repeat="team in $data")
+                                td.col-md-2(data-title="'Team ID'" sortable="'id'") {{team.id}}
+                                td.col-md-2(data-title="'Team Name'" sortable="'name'" filter="{ 'name': 'text' }") {{team.name}}
+                                td.col-md-4(data-title="'Team Description'" sortable="'description'" filter="{ 'description': 'text' }") {{team.description}}
+                                td.col-md-2
+                                    button.inputItem.btn.btn-primary.btn-xs.btn-danger.glyphicon.glyphicon-minus-sign(ng-click="removeTeam(team)")
+                            tr(ng-show='showAdd')
+                                td.col-md-2
+                                td.col-md-2
+                                    input.form-control.span1.required(ng-model='data.name')
+                                td.col-md-4
+                                    input.form-control.span1.required(ng-model='data.description')
+                                td.col-md-2
+                                    button.btn.btn-sm.btn-success(ng-controller="teamTabController" ng-click='addTeam()') Add
+
+            div.tab( id="three.tpl.html" ng-class="{hidden:!isActiveTab('three.tpl.html')}")
+                div.col-md-12(ng-controller="domainTabController")
+                    h2 Datawake Domains &nbsp;&nbsp;
+                        button.inputItem.btn.btn-primary.btn-xs.btn-success(ng-click="showAdd = ! showAdd" title="Import or Add Domain")
+                            .glyphicon.glyphicon-plus-sign(ng-show="!showAdd")
+                            .glyphicon.glyphicon-minus-sign(ng-show="showAdd")
+                        button.inputItem.btn.btn-default.btn-xs.glyphicon.glyphicon-refresh(ng-click="getDomains()" title="Refresh Domain List")
+                    div(ng-show="showAdd")
+                        table
+                            tr
+                                td
+                                    div.drop-box(ngf-drop ngf-select ng-show='showAdd' ng-model="files" ngf-drag-over-class="dragover" ngf-multiple="true" ngf-allow-dir="true" accept="json") Drop Domain file (.csv) here <br/> or <br/>click to Browse to file
+                                    div(ngf-no-file-drop ng-show='showAdd') File Drag/Drop is not supported for this browser
+
+
+                                td
+                                    div
+                                        table
+                                            tr
+                                                th &nbsp; &nbsp; Or Create One Manually
+                                            tr
+                                                td.col-md-2
+                                                    input.form-control.span1.required(ng-model='data.name' placeholder="Domain Name")
+                                                td.col-md-3
+                                                    input.form-control.span1.required(ng-model='data.description' placeholder="Description")
+                                                td.col-md-2
+                                                    select.form-control.span1.required(ng-model='data.teamId' ng-options="team.id as team.name for team in teams" class="ng-valid ng-dirty")
+                                                        option(value="" disabled selected) Select Team
+                                                td.col-md-1
+                                                    button.btn.btn-success(ng-controller="userTabController" ng-click='addDomain()') Add Domain
+
+
+
+                    div
+                        //table.table.table-striped.table-condensed.table-hover.ng-table-responsive(ng-table="tableParams" show-filter="true" )
+                        //    tbody(ng-repeat="group in $groups")
+                        //        tr.ng-table-group
+                        //            td(colspan="{{$columns.length}}")
+                        //                a(href="" ng-click="group.$hideRows = !group.$hideRows")
+                        //                    span
+                        //                        .glyphicon.glyphicon-chevron-right(ng-show="group.$hideRows")
+                        //                        .glyphicon.glyphicon-chevron-down(ng-show="!group.$hideRows")
+                        //                    strong(title="Description: {{group.data[0].description}}") Name: {{group.value}} &nbsp;&nbsp;&nbsp;  Used by Team: {{group.data[0].teamId}} &nbsp;
+                        //
+                        //                button.inputItem.btn.btn-default.btn-xs.glyphicon.glyphicon-export(title="Export this Domain and its Items")
+                        //
+                        //        tr(ng-show="!group.$hideRows" ng-repeat="item in group.data | orderBy:['featureType','featureValue']" )
+                        //            td.col-md-2(data-title="'Description'" sortable="'description'" filter="{ 'description': 'text' }") {{item.description}}
+                        //            td.col-md-2(data-title="'Feature Type'" filter="{ 'featureType': 'text' }") {{item.featureType}}
+                        //            td.col-md-8(data-title="'Feature Value'" filter="{ 'featureValue': 'text' }") {{item.featureValue}}
+
+                        table.table.table-striped.table-condensed.table-hover.ng-table-responsive(ng-table="tableParams" show-filter="false")
+                            tr(ng-repeat="domain in $data" )
+                                td.col-md-2(data-title="'Domain ID'" sortable="'id'") {{domain.id}}
+                                td.col-md-2(data-title="'Domain Name'" sortable="'name'" filter="{ 'name': 'text' }") {{domain.name}}
+                                td.col-md-3(data-title="'Domain Description'" sortable="'description'" filter="{ 'name': 'text' }") {{domain.description}}
+                                td.col-md-2(data-title="'Team Name'" sortable="'teamId'") {{domain.teamId}}
+                                td.col-md-1
+                                    button.inputItem.btn.btn-primary.btn-xs.btn-primary.glyphicon.glyphicon-edit(ng-click="openDomainEditor(domain)" title="Edit domain items")
+
+
+
+
+            div.tab( id="four.tpl.html" ng-class="{hidden:!isActiveTab('four.tpl.html')}")
+                div.col-md-12(ng-controller="trailTabController")
+                    h2 Datawake Trails &nbsp;&nbsp;
+                        button.inputItem.btn.btn-default.btn-xs.glyphicon.glyphicon-refresh(ng-click="getTrails()" title="Refresh Trails List")
+                    div
+                        table.table.table-striped.table-condensed.table-hover.ng-table-responsive(ng-table="tableParams" show-filter="true")
+                            tr(ng-repeat="trail in $data" )
+                                td.col-md-1(data-title="'ID'" sortable="'id'") {{trail.id}}
+                                td.col-md-2(data-title="'Name'" sortable="'name'" filter="{ 'name': 'text' }") {{trail.name}}
+                                td.col-md-2(data-title="'Description'" sortable="'description'" filter="{ 'description': 'text' }") {{trail.description}}
+                                td.col-md-2(data-title="'Date Created'" sortable="'created'") {{trail.created | date}}
+                                td.col-md-2(data-title="'Created By'" sortable="'createdBy'") {{trail.createdBy}}
+                                td.col-md-1(align="center" data-title="'Domain ID'" sortable="'domainId'") {{trail.domainId}}
+                                td.col-md-1(align="center" data-title="'Team ID'" sortable="'teamId'") {{trail.teamId}}
+                                td.col-md-1
+                                    button.inputItem.btn.btn-primary.btn-xs.btn-danger.glyphicon.glyphicon-minus-sign(ng-click="removeTrail(trail)")
+
+
+

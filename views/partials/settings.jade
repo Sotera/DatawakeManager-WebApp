@@ -1,0 +1,37 @@
+.modal-header
+    h3 Settings
+.modal-body
+    div.container-fluid
+        form(novalidate)#signup-form.well.span4
+            div.row
+                p.subheading User Settings
+                fieldset
+                    div.col-sm-6
+
+                        .control-group
+                            label.control-label(for='nameTextBox') Name
+                            .controls
+                                div.form-group.form-group-sm
+                                    input#nameTextBox.form-control(type='text', ng-model='data.fullname')
+                        .control-group
+                            label(for='themeSelect') Themes
+                            .controls
+                                div.form-group.form-group-sm
+                                    select#themeSelect.form-control(ng-model="data.themeName" ng-change='changeTheme()')
+                                        option( ng-repeat="theme in themes"  ) {{theme.name}}
+
+                    div.col-sm-6
+                        .control-group
+                            label.control-label(for='emailTextBox') Email
+                            .controls
+                                div.form-group.form-group-sm
+                                    input#emailTextBox.form-control(type='text', ng-model='data.email')
+
+            div.row
+                p.subheading System Configuration
+
+div.modal-footer
+    button.btn.btn-primary(ng-click="save()")
+        | Save
+    button.btn(ng-click="cancel()")
+        | Cancel

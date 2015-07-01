@@ -1,0 +1,45 @@
+doctype html
+html(ng-app="NodeWebBase" ,ng-controller="layoutController", lang='en')
+    head
+        title= title
+        base(href='/')
+        meta(charset='uft-8')
+        meta(name='viewport' content='width=device-width, initial-scale=1')
+        script(src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js")
+        script(src='/javascripts/vendor/bootstrap/dist/js/bootstrap.min.js')
+        script(src='/javascripts/vendor/angular/angular.min.js')
+        script(src='/javascripts/vendor/angular-resource/angular-resource.min.js')
+        script(src='/javascripts/vendor/angular-route/angular-route.min.js')
+        script(src='/javascripts/vendor/angular-cookies/angular-cookies.min.js')
+        script(src='/javascripts/vendor/ngDialog/js/ngDialog.min.js')
+        script(src='/javascripts/vendor/ng-file-upload/ng-file-upload.min.js')
+        script(src='/javascripts/controllers/app/sotera_ng-table.js')
+        script(src='/javascripts/vendor/ng-table-export/ng-table-export.js')
+        script(src='/javascripts/vendor/angu-fixed-header-table/angu-fixed-header-table.js')
+        script(src='/javascripts/vendor/angular-loading-bar/build/loading-bar.min.js')
+        script(src='/javascripts/controllers/layoutController.js')
+
+        script(src='/javascripts/services/messages/themeChangedMsg.js')
+        script(src='/javascripts/services/messages/changeThemeMsg.js')
+        script(src='/javascripts/services/messages/setFullNameMsg.js')
+        script(src='/app/javascripts/services/messages/changeUserMsg.js')
+        script(src='/app/javascripts/services/messages/changeTeamMsg.js')
+        script(src='/app/javascripts/services/messages/changeDomainMsg.js')
+        script(src='/app/javascripts/services/messages/changeTrailMsg.js')
+
+        script(src='/javascripts/services/themeService.js')
+        script(src='/javascripts/services/errorService.js')
+        script(src='/javascripts/services/configurationService.js')
+
+        script(src='/javascripts/component/logout/logout.js')
+        script(src='/javascripts/component/aoSettings/aoSettings.js')
+
+        link(rel="stylesheet" ng-href="/{{themeService.theme.bootstrapCss}}/bootstrap.min.css")
+
+        link(rel='stylesheet', href='/javascripts/vendor/ngDialog/css/ngDialog.min.css')
+        link(rel='stylesheet', href='/javascripts/vendor/ngDialog/css/ngDialog-theme-default.min.css')
+        link(rel='stylesheet', href='/stylesheets/style.css')
+        link(rel='stylesheet', ng-href='{{themeService.theme.appCss}}')
+        block scripts
+    body
+        block content
