@@ -12,6 +12,7 @@ div.scrollable.tabs(id="tabs" percent-Height percent="100"  ng-style="style" ng-
                         button.inputItem.btn.btn-primary.btn-xs.btn-success(ng-click="showAdd = ! showAdd" title="Add New User")
                             .glyphicon.glyphicon-plus-sign(ng-show="!showAdd")
                             .glyphicon.glyphicon-minus-sign(ng-show="showAdd")
+                        button.inputItem.btn.btn-default.btn-xs.glyphicon.glyphicon-filter(ng-click="showFilters()" title="Toggle Table Filters")
                         button.inputItem.btn.btn-default.btn-xs.glyphicon.glyphicon-refresh(ng-controller="userTabController" ng-click="getUsers()" title="Refresh Users List")
                     div
                         table.table.table-striped.table-condensed.table-hover.ng-table-responsive(ng-table="tableParams" show-filter="false")
@@ -21,7 +22,7 @@ div.scrollable.tabs(id="tabs" percent-Height percent="100"  ng-style="style" ng-
                                     span(ng-if="!user.$edit") {{user.email}}
                                     div(ng-if="user.$edit")
                                         input.form-control(type="text" ng-model="user.email" value="{{user.email}}" )
-                                td.col-md-2(data-title="'Team ID'" sortable="'teamId'")
+                                td.col-md-2(data-title="'Team ID'" sortable="'teamId'" filter="{ 'teamId': 'text' }")
                                     span(ng-if="!user.$edit") {{user.teamId}}
                                     div(ng-if="user.$edit")
                                         select.form-control.span1.required(ng-model='user.teamId' ng-options="team.id as team.name for team in teams" class="ng-valid ng-dirty")
@@ -46,11 +47,13 @@ div.scrollable.tabs(id="tabs" percent-Height percent="100"  ng-style="style" ng-
                         button.inputItem.btn.btn-primary.btn-xs.btn-success(ng-click="showAdd = ! showAdd" title="Add New Team")
                             .glyphicon.glyphicon-plus-sign(ng-show="!showAdd")
                             .glyphicon.glyphicon-minus-sign(ng-show="showAdd")
+                        button.inputItem.btn.btn-default.btn-xs.glyphicon.glyphicon-filter(ng-click="showFilters()" title="Toggle Table Filters")
                         button.inputItem.btn.btn-default.btn-xs.glyphicon.glyphicon-refresh(ng-click="getTeams()" title="Refresh Teams List")
+
                     div
-                        table.table.table-striped.table-condensed.table-hover.ng-table-responsive(ng-table="tableParams" show-filter="true")
+                        table.table.table-striped.table-condensed.table-hover.ng-table-responsive(ng-table="tableParams" show-filter="false")
                             tr(ng-repeat="team in $data")
-                                td.col-md-2(data-title="'Team ID'" sortable="'id'") {{team.id}}
+                                td.col-md-2(data-title="'Team ID'" sortable="'id'" filter="{ 'id': 'text' }") {{team.id}}
                                 td.col-md-2(data-title="'Team Name'" sortable="'name'" filter="{ 'name': 'text' }")
                                     span(ng-if="!team.$edit") {{team.name}}
                                     div(ng-if="team.$edit")
@@ -78,6 +81,7 @@ div.scrollable.tabs(id="tabs" percent-Height percent="100"  ng-style="style" ng-
                         button.inputItem.btn.btn-primary.btn-xs.btn-success(ng-click="showAdd = ! showAdd" title="Import or Add Domain")
                             .glyphicon.glyphicon-plus-sign(ng-show="!showAdd")
                             .glyphicon.glyphicon-minus-sign(ng-show="showAdd")
+                        button.inputItem.btn.btn-default.btn-xs.glyphicon.glyphicon-filter(ng-click="showFilters()" title="Toggle Table Filters")
                         button.inputItem.btn.btn-default.btn-xs.glyphicon.glyphicon-refresh(ng-click="getDomains()" title="Refresh Domain List")
                     div(ng-show="showAdd")
                         table
@@ -124,7 +128,7 @@ div.scrollable.tabs(id="tabs" percent-Height percent="100"  ng-style="style" ng-
 
                         table.table.table-striped.table-condensed.table-hover.ng-table-responsive(ng-table="tableParams" show-filter="false")
                             tr(ng-repeat="domain in $data" )
-                                td.col-md-2(data-title="'Domain ID'" sortable="'id'") {{domain.id}}
+                                td.col-md-2(data-title="'Domain ID'" sortable="'id'" filter="{ 'id': 'text' }") {{domain.id}}
                                 td.col-md-2(data-title="'Domain Name'" sortable="'name'" filter="{ 'name': 'text' }")
                                     span(ng-if="!domain.$edit") {{domain.name}}
                                     div(ng-if="domain.$edit")
@@ -133,7 +137,7 @@ div.scrollable.tabs(id="tabs" percent-Height percent="100"  ng-style="style" ng-
                                     span(ng-if="!domain.$edit") {{domain.description}}
                                     div(ng-if="domain.$edit")
                                         input.form-control(type="text" ng-model="domain.description" value="{{domain.description}}")
-                                td.col-md-2(data-title="'Team Name'" sortable="'teamId'")
+                                td.col-md-2(data-title="'Team ID'" sortable="'teamId'" filter="{ 'teamId': 'text' }")
                                     span(ng-if="!domain.$edit") {{domain.teamId}}
                                     div(ng-if="domain.$edit")
                                         select.form-control.span1.required(ng-model='domain.teamId' ng-options="team.id as team.name for team in teams" class="ng-valid ng-dirty")
@@ -149,9 +153,10 @@ div.scrollable.tabs(id="tabs" percent-Height percent="100"  ng-style="style" ng-
             div.tab( id="four.tpl.html" ng-class="{hidden:!isActiveTab('four.tpl.html')}")
                 div.col-md-12(ng-controller="trailTabController")
                     h2 Datawake Trails &nbsp;&nbsp;
+                        button.inputItem.btn.btn-default.btn-xs.glyphicon.glyphicon-filter(ng-click="showFilters()" title="Toggle Table Filters")
                         button.inputItem.btn.btn-default.btn-xs.glyphicon.glyphicon-refresh(ng-click="getTrails()" title="Refresh Trails List")
                     div
-                        table.table.table-striped.table-condensed.table-hover.ng-table-responsive(ng-table="tableParams" show-filter="true")
+                        table.table.table-striped.table-condensed.table-hover.ng-table-responsive(ng-table="tableParams" show-filter="false")
                             tr(ng-repeat="trail in $data" )
                                 td.col-md-1(data-title="'ID'" sortable="'id'") {{trail.id}}
                                 td.col-md-2(data-title="'Name'" sortable="'name'" filter="{ 'name': 'text' }") {{trail.name}}

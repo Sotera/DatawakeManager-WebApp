@@ -99,9 +99,12 @@ angular.module('NodeWebBase')
         }
     };
 
+    $scope.showFilters = function(){
+        $scope.tableParams.settings().$scope.show_filter=!$scope.tableParams.settings().$scope.show_filter;
+    }
 
-        $scope.updateTeams = function (){
-            $scope.getTeams();
-        };
+    $scope.updateTeams = function (){
+        $scope.getTeams();
+    };
 
-    }]);
+}]);

@@ -7,6 +7,7 @@ div.ngdialog(ng-controller="domainEditController")
                         button.inputItem.btn.btn-primary.btn-xs.btn-success(ng-click="showAdd = ! showAdd" title="Add Domain Item")
                             .glyphicon.glyphicon-plus-sign(ng-show="!showAdd")
                             .glyphicon.glyphicon-minus-sign(ng-show="showAdd")
+                        //button.inputItem.btn.btn-default.btn-xs.glyphicon.glyphicon-filter(ng-click="showFilters()" title="Toggle Table Filters")
 
                     div(ng-show='showAdd')
                         table
@@ -33,8 +34,8 @@ div.ngdialog(ng-controller="domainEditController")
                                 td.col-sm-1(data-title="'Domain Description'" ng-show="tableParams.myShowFlag") {{item.description}}
                                 td.col-sm-1(data-title="'Domain Team'" ng-show="tableParams.myShowFlag") {{item.teamId}}
                                 td.col-md-1(data-title="'Id'" sortable="'domainEntityId'" filter="{ 'domainEntityId': 'text' }") {{item.domainEntityId}}
-                                td.col-md-2(data-title="'Feature Type'" sortable="'name'" filter="{ 'name': 'text' }") {{item.featureType}}
-                                td.col-md-4(data-title="'Feature Value'" sortable="'description'" filter="{ 'name': 'text' }") {{item.featureValue}}
+                                td.col-md-2(data-title="'Feature Type'" sortable="'name'" filter="{ 'featureType': 'text' }") {{item.featureType}}
+                                td.col-md-4(data-title="'Feature Value'" sortable="'description'" filter="{ 'featureValue': 'text' }") {{item.featureValue}}
                                 td.col-md-1
                                     button.inputItem.btn.btn-primary.btn-xs.btn-danger.glyphicon.glyphicon-minus-sign(ng-click="removeItem(item)" title="Remove Feature")
                     div.col-md-8.col-md-offset-4

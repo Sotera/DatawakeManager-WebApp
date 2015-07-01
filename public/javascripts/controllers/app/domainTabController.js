@@ -153,6 +153,10 @@ angular.module('NodeWebBase')
             });
         };
 
+        $scope.showFilters = function(){
+            $scope.tableParams.settings().$scope.show_filter=!$scope.tableParams.settings().$scope.show_filter;
+        }
+
         $scope.updateDomains = function (){
             $scope.getDomains();
         };
