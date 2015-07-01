@@ -33,8 +33,8 @@ angular.module('NodeWebBase')
 
 
             $scope.tableParams = new ngTableParams({
-                noPager: true,
-                count: 999,           // count per page
+
+                count: $scope.domainItems.length,           // turn off pages (since this says set pagecount to total item count
                 filter:{
                     name:''
                 },
@@ -42,8 +42,7 @@ angular.module('NodeWebBase')
                     featureType: 'asc', featureValue: 'asc'
                 }
             }, {
-                counts:[],
-                isPagination: false,
+                counts:[], // turn off items per page
                 total: $scope.domainItems.length, // length of data
                 getData: function ($defer, params) {
                     params.myShowFlag = false;
