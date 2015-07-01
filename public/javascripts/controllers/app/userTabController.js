@@ -54,6 +54,18 @@ angular.module('NodeWebBase')
                 $http.post("/datawakeusers", $scope.data)
                     .success(function (res) {
                         changeUserMsg.broadcast();
+                        $scope.data.email = '';
+                        $scope.data.teamId= null;
+                    })
+                    .error(errorService.showError);
+            };
+
+            $scope.editUser = function (user) {
+                if (!configurationService.isAppConfigured())
+                    return;
+                $http.post("/datawakeusers", user)
+                    .success(function (res) {
+                        changeUserMsg.broadcast();
                     })
                     .error(errorService.showError);
             };
@@ -89,28 +101,17 @@ angular.module('NodeWebBase')
                 if (!configurationService.isAppConfigured())
                     return;
 
-                $http({
-                    method: "DELETE",
-                    url: "/datawakeusers/" + user.teamUserId
-                }).success(function (response) {
-                    $timeout(function () {
-                        changeUserMsg.broadcast();
-                    });
-                }).error(errorService.showError);
-
-            };
-
-
-
-            $scope.editUser = function (user) {
-                if (!configurationService.isAppConfigured())
-                    return;
-                //user.id = user.teamUserId;
-                $http.post("/datawakeusers", user)
-                    .success(function (res) {
-                        changeUserMsg.broadcast();
-                    })
-                    .error(errorService.showError);
+                var confirmation = confirm("User [" + user.email + "] selected for deletion, click 'Ok' to delete it or 'Cancel' to keep it.");
+                if(confirmation == true){
+                    $http({
+                        method: "DELETE",
+                        url: "/datawakeusers/" + user.teamUserId
+                    }).success(function (response) {
+                        $timeout(function () {
+                            changeUserMsg.broadcast();
+                        });
+                    }).error(errorService.showError);
+                }
             };
 
             $scope.updateUsers = function (){

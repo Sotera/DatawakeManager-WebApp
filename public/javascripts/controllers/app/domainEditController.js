@@ -75,23 +75,22 @@ angular.module('NodeWebBase')
                         $scope.data.featureValue= '';
                     })
                     .error(errorService.showError);
-
-
             };
 
             $scope.removeItem = function(item) {
                 if (!configurationService.isAppConfigured())
                     return;
-
-                $http({
-                    method: "DELETE",
-                    url: "/domainItems/" + item.domainEntityId
-                }).success(function (response) {
-                    $timeout(function () {
-                        changeDomainMsg.broadcast();
-                    });
-                }).error(errorService.showError);
-
+                var confirmation = confirm("Domain Item [" + item.featureValue + "] selected for deletion, click 'Ok' to delete it or 'Cancel' to keep it.");
+                if (confirmation == true) {
+                    $http({
+                        method: "DELETE",
+                        url: "/domainItems/" + item.domainEntityId
+                    }).success(function (response) {
+                        $timeout(function () {
+                            changeDomainMsg.broadcast();
+                        });
+                    }).error(errorService.showError);
+                }
             };
 
             $scope.getDomainItems = function(domain) {

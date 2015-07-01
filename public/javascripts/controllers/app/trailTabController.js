@@ -61,16 +61,17 @@ angular.module('NodeWebBase')
         $scope.removeTrail = function(trail) {
             if (!configurationService.isAppConfigured())
                 return;
-
-            $http({
-                method: "DELETE",
-                url: "/trails/" + trail.id
-            }).success(function (response) {
-                $timeout(function () {
-                    changeTrailMsg.broadcast();
-                });
-            }).error(errorService.showError);
-
+            var confirmation = confirm("Trail [" + trail.name + "] selected for deletion, click 'Ok' to delete it or 'Cancel' to keep it.");
+            if (confirmation == true) {
+                $http({
+                    method: "DELETE",
+                    url: "/trails/" + trail.id
+                }).success(function (response) {
+                    $timeout(function () {
+                        changeTrailMsg.broadcast();
+                    });
+                }).error(errorService.showError);
+            }
         };
 
         $scope.updateTrails = function (){

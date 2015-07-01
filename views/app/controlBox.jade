@@ -26,12 +26,10 @@ div.scrollable.tabs(id="tabs" percent-Height percent="100"  ng-style="style" ng-
                                     div(ng-if="user.$edit")
                                         select.form-control.span1.required(ng-model='user.teamId' ng-options="team.id as team.name for team in teams" class="ng-valid ng-dirty")
                                             option(value="{{user.teamId}}" selected)
-
                                 td.col-md-2
-                                    button.inputItem.btn.btn-primary.btn-xs.btn-danger.glyphicon.glyphicon-minus-sign(ng-click="removeUser(user)")
-                                    button.inputItem.btn.btn-primary.btn-xs.btn-danger.glyphicon.glyphicon-edit(ng-if="!user.$edit" ng-click="user.$edit=true")
-                                    button.inputItem.btn.btn-primary.btn-xs.btn-danger.glyphicon.glyphicon-save(ng-if="user.$edit" ng-click="editUser(user);user.$edit=false")
-
+                                    button.inputItem.btn.btn-primary.btn-xs.btn-primary.glyphicon.glyphicon-edit(ng-if="!user.$edit" ng-click="user.$edit=true" title="Edit User")
+                                    button.inputItem.btn.btn-primary.btn-xs.btn-primary.glyphicon.glyphicon-save(ng-if="user.$edit" ng-click="editUser(user);user.$edit=false" title="Save User")
+                                    button.inputItem.btn.btn-primary.btn-xs.btn-danger.glyphicon.glyphicon-minus-sign(ng-click="removeUser(user)" title="Remove User")
                             tr(ng-show='showAdd')
                                 td.col-md-2
                                 td.col-md-4
@@ -53,10 +51,18 @@ div.scrollable.tabs(id="tabs" percent-Height percent="100"  ng-style="style" ng-
                         table.table.table-striped.table-condensed.table-hover.ng-table-responsive(ng-table="tableParams" show-filter="true")
                             tr(ng-repeat="team in $data")
                                 td.col-md-2(data-title="'Team ID'" sortable="'id'") {{team.id}}
-                                td.col-md-2(data-title="'Team Name'" sortable="'name'" filter="{ 'name': 'text' }") {{team.name}}
-                                td.col-md-4(data-title="'Team Description'" sortable="'description'" filter="{ 'description': 'text' }") {{team.description}}
+                                td.col-md-2(data-title="'Team Name'" sortable="'name'" filter="{ 'name': 'text' }")
+                                    span(ng-if="!team.$edit") {{team.name}}
+                                    div(ng-if="team.$edit")
+                                        input.form-control(type="text" ng-model="team.name" value="{{team.name}}" )
+                                td.col-md-4(data-title="'Team Description'" sortable="'description'" filter="{ 'description': 'text' }")
+                                    span(ng-if="!team.$edit") {{team.description}}
+                                    div(ng-if="team.$edit")
+                                        input.form-control(type="text" ng-model="team.description" value="{{team.description}}")
                                 td.col-md-2
-                                    button.inputItem.btn.btn-primary.btn-xs.btn-danger.glyphicon.glyphicon-minus-sign(ng-click="removeTeam(team)")
+                                    button.inputItem.btn.btn-primary.btn-xs.btn-primary.glyphicon.glyphicon-edit(ng-if="!team.$edit" ng-click="team.$edit=true" title="Edit Team")
+                                    button.inputItem.btn.btn-primary.btn-xs.btn-primary.glyphicon.glyphicon-save(ng-if="team.$edit" ng-click="editTeam(team);team.$edit=false" title="Save Team")
+                                    button.inputItem.btn.btn-primary.btn-xs.btn-danger.glyphicon.glyphicon-minus-sign(ng-click="removeTeam(team)" title="Remove Team")
                             tr(ng-show='showAdd')
                                 td.col-md-2
                                 td.col-md-2
@@ -80,12 +86,11 @@ div.scrollable.tabs(id="tabs" percent-Height percent="100"  ng-style="style" ng-
                                     div.drop-box(ngf-drop ngf-select ng-show='showAdd' ng-model="files" ngf-drag-over-class="dragover" ngf-multiple="true" ngf-allow-dir="true" accept="json") Drop Domain file (.csv) here <br/> or <br/>click to Browse to file
                                     div(ngf-no-file-drop ng-show='showAdd') File Drag/Drop is not supported for this browser
 
-
                                 td
                                     div
                                         table
                                             tr
-                                                th &nbsp; &nbsp; Or Create One Manually
+                                                th.col-md-3 &nbsp; &nbsp; Or Create One Manually
                                             tr
                                                 td.col-md-2
                                                     input.form-control.span1.required(ng-model='data.name' placeholder="Domain Name")
@@ -120,12 +125,24 @@ div.scrollable.tabs(id="tabs" percent-Height percent="100"  ng-style="style" ng-
                         table.table.table-striped.table-condensed.table-hover.ng-table-responsive(ng-table="tableParams" show-filter="false")
                             tr(ng-repeat="domain in $data" )
                                 td.col-md-2(data-title="'Domain ID'" sortable="'id'") {{domain.id}}
-                                td.col-md-2(data-title="'Domain Name'" sortable="'name'" filter="{ 'name': 'text' }") {{domain.name}}
-                                td.col-md-3(data-title="'Domain Description'" sortable="'description'" filter="{ 'name': 'text' }") {{domain.description}}
-                                td.col-md-2(data-title="'Team Name'" sortable="'teamId'") {{domain.teamId}}
+                                td.col-md-2(data-title="'Domain Name'" sortable="'name'" filter="{ 'name': 'text' }")
+                                    span(ng-if="!domain.$edit") {{domain.name}}
+                                    div(ng-if="domain.$edit")
+                                        input.form-control(type="text" ng-model="domain.name" value="{{domain.name}}" )
+                                td.col-md-3(data-title="'Domain Description'" sortable="'description'" filter="{ 'name': 'text' }")
+                                    span(ng-if="!domain.$edit") {{domain.description}}
+                                    div(ng-if="domain.$edit")
+                                        input.form-control(type="text" ng-model="domain.description" value="{{domain.description}}")
+                                td.col-md-2(data-title="'Team Name'" sortable="'teamId'")
+                                    span(ng-if="!domain.$edit") {{domain.teamId}}
+                                    div(ng-if="domain.$edit")
+                                        select.form-control.span1.required(ng-model='domain.teamId' ng-options="team.id as team.name for team in teams" class="ng-valid ng-dirty")
+                                            option(value="{{domain.teamId}}" selected)
                                 td.col-md-1
-                                    button.inputItem.btn.btn-primary.btn-xs.btn-primary.glyphicon.glyphicon-edit(ng-click="openDomainEditor(domain)" title="Edit domain items")
-
+                                    button.inputItem.btn.btn-primary.btn-xs.btn-warning.glyphicon.glyphicon-zoom-in(ng-click="openDomainEditor(domain)" title="View domain items")
+                                    button.inputItem.btn.btn-primary.btn-xs.btn-primary.glyphicon.glyphicon-edit(ng-if="!domain.$edit" ng-click="domain.$edit=true" title="Edit domain")
+                                    button.inputItem.btn.btn-primary.btn-xs.btn-primary.glyphicon.glyphicon-save(ng-if="domain.$edit" ng-click="editDomain(domain);domain.$edit=false" title="Save domain")
+                                    button.inputItem.btn.btn-primary.btn-xs.btn-danger.glyphicon.glyphicon-minus-sign(ng-click="removeDomain(domain)" title="Remove Domain")
 
 
 
@@ -144,7 +161,7 @@ div.scrollable.tabs(id="tabs" percent-Height percent="100"  ng-style="style" ng-
                                 td.col-md-1(align="center" data-title="'Domain ID'" sortable="'domainId'" filter="{ 'domainId': 'text' }") {{trail.domainId}}
                                 td.col-md-1(align="center" data-title="'Team ID'" sortable="'teamId'" filter="{ 'teamId': 'text' }") {{trail.teamId}}
                                 td.col-md-1
-                                    button.inputItem.btn.btn-primary.btn-xs.btn-danger.glyphicon.glyphicon-minus-sign(ng-click="removeTrail(trail)")
+                                    button.inputItem.btn.btn-primary.btn-xs.btn-danger.glyphicon.glyphicon-minus-sign(ng-click="removeTrail(trail)" title="Remove Trail")
 
 
 

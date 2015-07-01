@@ -23,5 +23,15 @@ router.post('/', function (req, res) {
     })
 });
 
+router.delete('/:id', function (req, res) {
+    netHelpers.performAjaxRequest('localhost', 5500, '/api/DatawakeDomains/' + req.params.id, 'DELETE', null,function (resultObject) {
+        if (resultObject.error) {
+            res.status(resultObject.error.status).send(resultObject.error.message);
+            return;
+        }
+        res.status(200).send("OK");
+    })
+});
+
 
 module.exports = router;

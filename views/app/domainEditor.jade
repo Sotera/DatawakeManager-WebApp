@@ -40,7 +40,7 @@ div.ngdialog(ng-controller="domainEditController")
                     div.col-md-8.col-md-offset-4
                         div.btn-group-xs
                             a.btn.btn-primary(ng-click="csv.generate()" ng-href="{{ csv.link() }}" download="{{domainName}}.csv" title="Export Domain to file (.csv)")
-                                i.glyphicon.glyphicon-new-window &#160;Export
+                                i.glyphicon.glyphicon-download-alt &#160;Export
                             label &nbsp;
                             a.btn.btn-default(ng-click="close()" title="Close")
                                 i.glyphicon.glyphicon-remove &#160;Close

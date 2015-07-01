@@ -61,6 +61,19 @@ angular.module('NodeWebBase')
             $http.post("/domains", $scope.data)
                 .success(function (res) {
                     changeDomainMsg.broadcast();
+                    $scope.data.name = '';
+                    $scope.data.description= '';
+                    $scope.data.teamId= null;
+                })
+                .error(errorService.showError);
+        };
+
+        $scope.editDomain = function (domain) {
+            if (!configurationService.isAppConfigured())
+                return;
+            $http.post("/domains", domain)
+                .success(function (res) {
+                    changeDomainMsg.broadcast();
                 })
                 .error(errorService.showError);
         };
@@ -90,6 +103,22 @@ angular.module('NodeWebBase')
             }).success(function (response) {
                 $scope.teams = response;
             }).error(errorService.showError);
+        };
+
+        $scope.removeDomain = function (domain) {
+            if (!configurationService.isAppConfigured())
+                return;
+            var confirmation = confirm("Domain [" + domain.name + "] selected for deletion, click 'Ok' to delete it or 'Cancel' to keep it.");
+            if (confirmation == true) {
+                $http({
+                    method: "DELETE",
+                    url: "/domains/" + domain.id
+                }).success(function (response) {
+                    $timeout(function () {
+                        changeDomainMsg.broadcast();
+                    });
+                }).error(errorService.showError);
+            }
         };
 
         $scope.upload = function (files) {
