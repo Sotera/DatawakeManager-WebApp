@@ -128,10 +128,10 @@ div.scrollable.tabs(id="tabs" percent-Height percent="100"  ng-style="style" ng-
                                 td.col-md-1(data-title="'ID'" sortable="'id'") {{trail.id}}
                                 td.col-md-2(data-title="'Name'" sortable="'name'" filter="{ 'name': 'text' }") {{trail.name}}
                                 td.col-md-2(data-title="'Description'" sortable="'description'" filter="{ 'description': 'text' }") {{trail.description}}
-                                td.col-md-2(data-title="'Date Created'" sortable="'created'") {{trail.created | date}}
-                                td.col-md-2(data-title="'Created By'" sortable="'createdBy'") {{trail.createdBy}}
-                                td.col-md-1(align="center" data-title="'Domain ID'" sortable="'domainId'") {{trail.domainId}}
-                                td.col-md-1(align="center" data-title="'Team ID'" sortable="'teamId'") {{trail.teamId}}
+                                td.col-md-2(data-title="'Date Created'" sortable="'created'" filter="{ 'created': 'text' }") {{trail.created | date}}
+                                td.col-md-2(data-title="'Created By'" sortable="'createdBy'" filter="{ 'createdBy': 'text' }") {{trail.createdBy}}
+                                td.col-md-1(align="center" data-title="'Domain ID'" sortable="'domainId'" filter="{ 'domainId': 'text' }") {{trail.domainId}}
+                                td.col-md-1(align="center" data-title="'Team ID'" sortable="'teamId'" filter="{ 'teamId': 'text' }") {{trail.teamId}}
                                 td.col-md-1
                                     button.inputItem.btn.btn-primary.btn-xs.btn-danger.glyphicon.glyphicon-minus-sign(ng-click="removeTrail(trail)")
 

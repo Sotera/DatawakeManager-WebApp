@@ -118,7 +118,7 @@ angular.module('NodeWebBase')
         $scope.openDomainEditor = function(domain) {
             $scope.activeDomain = domain;
             ngDialog.open({
-                className: 'ngDialog-theme-plain',
+                className: '/stylesheets/app/ngDialog-theme-sotera',
                 template: '/views/app/domainEditor',
                 scope: $scope
             });
