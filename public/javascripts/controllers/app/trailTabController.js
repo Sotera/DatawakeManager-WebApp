@@ -2,19 +2,26 @@
  * Created by
  */
 angular.module('NodeWebBase')
-    .controller('trailTabController',['$scope','$http','ngTableParams','errorService','configurationService','changeTrailMsg','$filter','$timeout',
-        function ($scope, $http, ngTableParams, errorService, configurationService,changeTrailMsg, $filter, $timeout) {
+    .controller('trailTabController',['$scope','$http','ngTableParams','errorService','configurationService','changeTrailMsg','changeDomainMsg','changeTeamMsg','$filter','$timeout','ngDialog',
+        function ($scope, $http, ngTableParams, errorService, configurationService,changeTrailMsg, changeDomainMsg, changeTeamMsg, $filter, $timeout, ngDialog) {
 
         var watchRemoval = $scope.$watch(configurationService.isAppConfigured ,function(newVal,oldVal) {
             if( newVal ){ // Don't do anything if Undefined.
                 $scope.updateTrails();
+                $scope.getTeams();
+                $scope.getDomains();
                 watchRemoval();
             }
         });
 
         changeTrailMsg.listen(function(){$scope.updateTrails()});
+        changeDomainMsg.listen(function(){$scope.updateDomains()});
+        changeTeamMsg.listen(function () {$scope.updateTeams()});
 
         $scope.trails = [];
+        $scope.domains = [];
+        $scope.teams = [];
+        $scope.activeTrail = null;
 
         $scope.tableParams = new ngTableParams({
             page: 1,            // show first page
@@ -42,6 +49,60 @@ angular.module('NodeWebBase')
             }
         });
 
+
+        $scope.addTrail = function () {
+            if (!configurationService.isAppConfigured())
+                return;
+            $scope.data.id = 0;
+            $scope.data.createdBy = "Administrator";
+            $scope.data.created = new Date().getTime();
+            $http.post("/trails", $scope.data)
+                .success(function (res) {
+                    changeTrailMsg.broadcast();
+                    $scope.data.name = '';
+                    $scope.data.description = '';
+                    $scope.data.teamId = null;
+                    $scope.data.domainId = null;
+                })
+                .error(errorService.showError);
+        };
+
+        $scope.editTrail = function (trail) {
+            if (!configurationService.isAppConfigured())
+                return;
+            $http.post("/trails", trail)
+                .success(function (res) {
+                    changeTrailMsg.broadcast();
+                })
+                .error(errorService.showError);
+        };
+
+        $scope.getDomains = function() {
+            if (!configurationService.isAppConfigured())
+                return;
+
+            $http({
+                method: "GET",
+                url: "/domains"
+            }).success(function (response) {
+                $timeout(function () {
+                    $scope.domains = response;
+                });
+            }).error(errorService.showError);
+        };
+
+        $scope.getTeams = function () {
+            if (!configurationService.isAppConfigured())
+                return;
+
+            $http({
+                method: "GET",
+                url: "/teams"
+            }).success(function (response) {
+                $scope.teams = response;
+            }).error(errorService.showError);
+        };
+
         $scope.getTrails = function() {
             if (!configurationService.isAppConfigured())
                 return;
@@ -57,6 +118,15 @@ angular.module('NodeWebBase')
 
             }).error(errorService.showError);
         }
+
+        $scope.openTrailEditor = function(trail) {
+            $scope.activeTrail = trail;
+            ngDialog.open({
+                className: '/stylesheets/app/ngDialog-theme-sotera',
+                template: '/views/app/trailEditor',
+                scope: $scope
+            });
+        };
 
         $scope.removeTrail = function(trail) {
             if (!configurationService.isAppConfigured())
@@ -82,5 +152,12 @@ angular.module('NodeWebBase')
             $scope.getTrails();
         };
 
+        $scope.updateDomains = function (){
+            $scope.getDomains();
+        };
+
+        $scope.updateTeams = function (){
+            $scope.getTeams();
+        }
 
     }]);

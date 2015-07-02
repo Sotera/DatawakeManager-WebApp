@@ -62,8 +62,8 @@ angular.module('NodeWebBase')
                 .success(function (res) {
                     changeDomainMsg.broadcast();
                     $scope.data.name = '';
-                    $scope.data.description= '';
-                    $scope.data.teamId= null;
+                    $scope.data.description = '';
+                    $scope.data.teamId = null;
                 })
                 .error(errorService.showError);
         };

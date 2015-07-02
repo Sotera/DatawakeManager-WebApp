@@ -1,0 +1,25 @@
+div.ngdialog(ng-controller="trailEditController").col-md-12
+    div.ngdialog-overlay
+        div.ngdialog-content
+            div.panel.panel-primary
+                div.panel-heading
+                    h4 Edit Trail Items for: {{trailName}} &nbsp;&nbsp;&nbsp;
+                div.panel-body
+                    div
+                        table.table.table-striped.table-condensed.table-hover.ng-table-responsive(ng-table="tableParams" show-filter="false" style="width:90%; height:500px"  export-csv="csv" fixed-header)
+                            tr(ng-repeat="item in trailItems")
+                                td.col-md-1(data-title="'Domain ID'" ng-show="tableParams.myShowFlag") {{item.domainId}}
+                                td.col-md-1(data-title="'Trail Name'" ng-show="tableParams.myShowFlag") {{item.name}}
+                                td.col-md-1(data-title="'Trail Description'" ng-show="tableParams.myShowFlag") {{item.description}}
+                                td.col-md-1(data-title="'Trail Team'" ng-show="tableParams.myShowFlag") {{item.teamId}}
+                                td.col-md-2(data-title="'Id'" sortable="'id'" filter="{ 'id': 'text' }") {{item.id}}
+                                td.col-md-3(data-title="'URL'" sortable="'url'" filter="{ 'url': 'text' }") {{item.url}}
+                                td.col-md-2(data-title="'Created'" sortable="'created'" filter="{ 'created': 'text' }") {{item.ts }}
+                                td.col-md-2(data-title="'Created By'" sortable="'useremail'" filter="{ 'useremail': 'text' }") {{item.useremail}}
+                                td.col-md-1
+                                    button.inputItem.btn.btn-primary.btn-xs.btn-danger.glyphicon.glyphicon-minus-sign(ng-click="removeItem(item)" title="Remove Trail Item")
+                    div.col-md-8.col-md-offset-4
+                        div.btn-group-xs
+                            a.btn.btn-default(ng-click="close()" title="Close")
+                                i.glyphicon.glyphicon-remove &#160;Close
+

@@ -92,7 +92,7 @@ angular.module('NodeWebBase')
                 }).success(function (response) {
                     $timeout(function () {
                         $scope.users = response;
-                        $scope.tableParams.reload();
+
                     });
                 }).error(errorService.showError);
             };

@@ -50,7 +50,7 @@ angular.module('NodeWebBase')
                 $filter('orderBy')($scope.domainItems,params.orderBy()):
                 $scope.domainItems;
 
-            filteredDomainItems = params.filter() ?
+            var filteredDomainItems = params.filter() ?
                 $filter('filter')(orderedDomainItems, params.filter()) :
                 orderedDomainItems;
 
