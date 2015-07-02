@@ -29,7 +29,7 @@ div.scrollable.tabs(id="tabs" percent-Height percent="100"  ng-style="style" ng-
                                             option(value="{{user.teamId}}" selected)
                                 td.col-md-2
                                     button.inputItem.btn.btn-primary.btn-xs.glyphicon.glyphicon-edit(ng-if="!user.$edit" ng-click="user.$edit=true" title="Edit User")
-                                    button.inputItem.btn.btn-primary.btn-xs.glyphicon.glyphicon-save(ng-if="user.$edit" ng-click="editUser(user);user.$edit=false" title="Save User")
+                                    button.inputItem.btn.btn-success.btn-xs.glyphicon.glyphicon-save(ng-if="user.$edit" ng-click="editUser(user);user.$edit=false" title="Save User")
                                     button.inputItem.btn.btn-danger.btn-xs.glyphicon.glyphicon-minus-sign(ng-click="removeUser(user)" title="Remove User")
                             tr(ng-show='showAdd')
                                 td.col-md-2
@@ -64,7 +64,7 @@ div.scrollable.tabs(id="tabs" percent-Height percent="100"  ng-style="style" ng-
                                         input.form-control(type="text" ng-model="team.description" value="{{team.description}}")
                                 td.col-md-2
                                     button.inputItem.btn.btn-primary.btn-xs.glyphicon.glyphicon-edit(ng-if="!team.$edit" ng-click="team.$edit=true" title="Edit Team")
-                                    button.inputItem.btn.btn-primary.btn-xs.glyphicon.glyphicon-save(ng-if="team.$edit" ng-click="editTeam(team);team.$edit=false" title="Save Team")
+                                    button.inputItem.btn.btn-success.btn-xs.glyphicon.glyphicon-save(ng-if="team.$edit" ng-click="editTeam(team);team.$edit=false" title="Save Team")
                                     button.inputItem.btn.btn-danger.btn-xs.glyphicon.glyphicon-minus-sign(ng-click="removeTeam(team)" title="Remove Team")
                             tr(ng-show='showAdd')
                                 td.col-md-2
@@ -125,7 +125,7 @@ div.scrollable.tabs(id="tabs" percent-Height percent="100"  ng-style="style" ng-
                                 td.col-md-1
                                     button.inputItem.btn.btn-default.btn-xs.glyphicon.glyphicon-zoom-in(ng-click="openDomainEditor(domain)" title="View domain items")
                                     button.inputItem.btn.btn-primary.btn-xs.glyphicon.glyphicon-edit(ng-if="!domain.$edit" ng-click="domain.$edit=true" title="Edit domain")
-                                    button.inputItem.btn.btn-primary.btn-xs.glyphicon.glyphicon-save(ng-if="domain.$edit" ng-click="editDomain(domain);domain.$edit=false" title="Save domain")
+                                    button.inputItem.btn.btn-success.btn-xs.glyphicon.glyphicon-save(ng-if="domain.$edit" ng-click="editDomain(domain);domain.$edit=false" title="Save domain")
                                     button.inputItem.btn.btn-danger.btn-xs.glyphicon.glyphicon-minus-sign(ng-click="removeDomain(domain)" title="Remove Domain")
 
 
@@ -163,7 +163,7 @@ div.scrollable.tabs(id="tabs" percent-Height percent="100"  ng-style="style" ng-
                                 td.col-md-1
                                     button.inputItem.btn.btn-default.btn-xs.glyphicon.glyphicon-zoom-in(ng-click="openTrailEditor(trail)" title="View trail items")
                                     button.inputItem.btn.btn-primary.btn-xs.glyphicon.glyphicon-edit(ng-if="!trail.$edit" ng-click="trail.$edit=true" title="Edit trail")
-                                    button.inputItem.btn.btn-primary.btn-xs.glyphicon.glyphicon-save(ng-if="trail.$edit" ng-click="editTrail(trail);trail.$edit=false" title="Save trail")
+                                    button.inputItem.btn.btn-success.btn-xs.glyphicon.glyphicon-save(ng-if="trail.$edit" ng-click="editTrail(trail);trail.$edit=false" title="Save trail")
                                     button.inputItem.btn.btn-danger.btn-xs.glyphicon.glyphicon-minus-sign(ng-click="removeTrail(trail)" title="Remove trail")
                             tr(ng-show='showAdd')
                                 td.col-md-2
