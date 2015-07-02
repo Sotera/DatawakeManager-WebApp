@@ -113,7 +113,7 @@ div.scrollable.tabs(id="tabs" percent-Height percent="100"  ng-style="style" ng-
                                     span(ng-if="!domain.$edit") {{domain.name}}
                                     div(ng-if="domain.$edit")
                                         input.form-control(type="text" ng-model="domain.name" value="{{domain.name}}" )
-                                td.col-md-3(data-title="'Domain Description'" sortable="'description'" filter="{ 'name': 'text' }")
+                                td.col-md-3(data-title="'Domain Description'" sortable="'description'" filter="{ 'description': 'text' }")
                                     span(ng-if="!domain.$edit") {{domain.description}}
                                     div(ng-if="domain.$edit")
                                         input.form-control(type="text" ng-model="domain.description" value="{{domain.description}}")
