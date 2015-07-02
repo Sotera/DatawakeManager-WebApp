@@ -2,7 +2,7 @@ var express = require('express');
 var router = express.Router();
 var fs = require('fs');
 
-var netHelpers = require('netHelpers');
+var netHelpers = require('../../modules/netHelpers/lib/netHelpers');
 
 //extract the domain. A Domain has the following attributes: id, name, description, teamId
 function getDomainFromCSV2 (csv){
