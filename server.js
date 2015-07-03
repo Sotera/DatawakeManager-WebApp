@@ -1,3 +1,4 @@
+var debug = require('debug')('server');
 var express = require('express');
 var path = require('path');
 var logger = require('morgan');
@@ -8,6 +9,9 @@ var multiparty = require('connect-multiparty');
 var multipartyMiddleware = multiparty();
 
 var app = express();
+
+// handle server listen port this way for now
+app.set('port', process.env.PORT || 3001);
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -68,4 +72,9 @@ app.use(function (err, req, res, next) {
 	});
 });
 
-module.exports = app;
+// and let's get things started
+var server = app.listen(app.get('port'), function() {
+  app.emit('started');
+  debug('Express server listening on port ' + server.address().port);
+});
+
