@@ -103,12 +103,12 @@ router.post('/', function (req, res) {
     var domainItemJSON = getDomainItemsFromCSV2(domainFile);
 
     //We have to parse the csv into the Domain and the DomainItems.  Domain must be created first, then we can create the domain items.
-    netHelpers.performAjaxRequest('localhost', 5500, '/api/DatawakeDomains' + req.url, 'PUT', domainJSON ,function (resultObject) {
+    netHelpers.performLoopbackAjaxRequest('/api/DatawakeDomains' + req.url, 'PUT', domainJSON ,function (resultObject) {
         if (resultObject.error) {
             res.status(resultObject.error.status).send(resultObject.error.message);
             return;
         }
-        netHelpers.performAjaxRequest('localhost', 5500, '/api/DatawakeDomainEntities' + req.url, 'PUT', domainItemJSON ,function (resultObject) {
+        netHelpers.performLoopbackAjaxRequest('/api/DatawakeDomainEntities' + req.url, 'PUT', domainItemJSON ,function (resultObject) {
             if (resultObject.error) {
                 res.status(resultObject.error.status).send(resultObject.error.message);
                 return;

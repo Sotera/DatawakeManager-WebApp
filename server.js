@@ -1,4 +1,3 @@
-var debug = require('debug')('server');
 var express = require('express');
 var path = require('path');
 var logger = require('morgan');
@@ -7,11 +6,15 @@ var expressSession = require('express-session');
 var bodyParser = require('body-parser');
 var multiparty = require('connect-multiparty');
 var multipartyMiddleware = multiparty();
+var winston = require('winston');
+
+//Configure output file for production logging
+winston.add(winston.transports.File, {filename: '/var/log/sotera/somefile.log'});
 
 var app = express();
 
 // handle server listen port this way for now
-app.set('port', process.env.PORT || 3001);
+app.set('port', process.env.PORT || 3002);
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -75,6 +78,7 @@ app.use(function (err, req, res, next) {
 // and let's get things started
 var server = app.listen(app.get('port'), function() {
   app.emit('started');
-  debug('Express server listening on port ' + server.address().port);
+  winston.level = 'debug';
+  winston.log('debug','Express server listening on port ' + server.address().port);
 });
 

@@ -4,7 +4,7 @@ var router = express.Router();
 var netHelpers = require('../../modules/netHelpers/lib/netHelpers');
 
 router.get('/', function (req, res) {
-    netHelpers.performAjaxRequest('localhost', 5500, '/api/DatawakeDomains' + req.url, 'GET', null,function (resultObject) {
+    netHelpers.performLoopbackAjaxRequest('/api/DatawakeDomains' + req.url, 'GET', null,function (resultObject) {
         if (resultObject.error) {
             res.status(resultObject.error.status).send(resultObject.error.message);
             return;
@@ -14,7 +14,7 @@ router.get('/', function (req, res) {
 });
 
 router.post('/', function (req, res) {
-    netHelpers.performAjaxRequest('localhost', 5500, '/api/DatawakeDomains' + req.url, 'PUT', req.body,function (resultObject) {
+    netHelpers.performLoopbackAjaxRequest('/api/DatawakeDomains' + req.url, 'PUT', req.body,function (resultObject) {
         if (resultObject.error) {
             res.status(resultObject.error.status).send(resultObject.error.message);
             return;
@@ -24,7 +24,7 @@ router.post('/', function (req, res) {
 });
 
 router.delete('/:id', function (req, res) {
-    netHelpers.performAjaxRequest('localhost', 5500, '/api/DatawakeDomains/' + req.params.id, 'DELETE', null,function (resultObject) {
+    netHelpers.performLoopbackAjaxRequest('/api/DatawakeDomains/' + req.params.id, 'DELETE', null,function (resultObject) {
         if (resultObject.error) {
             res.status(resultObject.error.status).send(resultObject.error.message);
             return;

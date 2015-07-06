@@ -1,6 +1,11 @@
 var querystring = require('querystring');
 var http = require('http');
 
+exports.performLoopbackAjaxRequest = function (path, method, data, success, error) {
+	return exports.performAjaxRequest(process.env.LOOPBACK_PORT_3001_TCP_ADDR, process.env.LOOPBACK_PORT_3001_TCP_PORT,
+		path, method, data, success, error);
+};
+
 exports.performAjaxRequest = function (hostname, port, path, method, data, success, error) {
 	var dataString = null;
 	var headers = {};

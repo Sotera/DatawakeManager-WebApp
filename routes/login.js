@@ -8,7 +8,7 @@ router.get('/', function (req, res) {
 });
 
 router.post('/', function (req, res) {
-    netHelpers.performAjaxRequest('localhost', 5500, '/api/users/login', 'POST', req.body, function (resultObject) {
+    netHelpers.performLoopbackAjaxRequest('/api/users/login', 'POST', req.body, function (resultObject) {
         if (resultObject.error) {
             res.status(resultObject.error.status).send('Unauthorized');
             return;
@@ -20,7 +20,7 @@ router.post('/', function (req, res) {
 });
 
 router.post('/signup', function (req, res) {
-    netHelpers.performAjaxRequest('localhost', 5500, '/api/users', 'POST', req.body, function (resultObject) {
+    netHelpers.performLoopbackAjaxRequest('/api/users', 'POST', req.body, function (resultObject) {
         if (resultObject.error) {
             res.status(resultObject.error.status).send(resultObject.error.message);
             return;

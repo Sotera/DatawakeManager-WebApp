@@ -4,7 +4,7 @@ var router = express.Router();
 var netHelpers = require('../modules/netHelpers/lib/netHelpers');
 
 router.get('/:vp', function (req, res) {
-    netHelpers.performAjaxRequest('localhost', 5500, '/api/users' + req.url, 'GET', null,function (resultObject) {
+    netHelpers.performLoopbackAjaxRequest('/api/users' + req.url, 'GET', null,function (resultObject) {
         if (resultObject.error) {
             res.status(resultObject.error.status).send(resultObject.error.message);
             return;
@@ -14,7 +14,7 @@ router.get('/:vp', function (req, res) {
 });
 
 router.post('/:vp', function (req, res) {
-    netHelpers.performAjaxRequest('localhost', 5500, '/api/users' + req.url, 'PUT', req.body,function (resultObject) {
+    netHelpers.performLoopbackAjaxRequest('/api/users' + req.url, 'PUT', req.body,function (resultObject) {
         if (resultObject.error) {
             res.status(resultObject.error.status).send(resultObject.error.message);
             return;

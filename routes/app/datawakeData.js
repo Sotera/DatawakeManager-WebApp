@@ -4,7 +4,7 @@ var router = express.Router();
 var netHelpers = require('../../modules/netHelpers/lib/netHelpers');
 
 router.get('/', function (req, res) {
-    netHelpers.performAjaxRequest('localhost', 5500, '/api/DatawakeData' + req.url, 'GET', null,function (resultObject) {
+    netHelpers.performLoopbackAjaxRequest('/api/DatawakeData' + req.url, 'GET', null,function (resultObject) {
         if (resultObject.error) {
             res.status(resultObject.error.status).send(resultObject.error.message);
             return;
@@ -14,7 +14,7 @@ router.get('/', function (req, res) {
 });
 
 router.post('/', function (req, res) {
-    netHelpers.performAjaxRequest('localhost', 5500, '/api/DatawakeData' + req.url, 'PUT', req.body,function (resultObject) {
+    netHelpers.performLoopbackAjaxRequest('/api/DatawakeData' + req.url, 'PUT', req.body,function (resultObject) {
         if (resultObject.error) {
             res.status(resultObject.error.status).send(resultObject.error.message);
             return;
@@ -28,7 +28,7 @@ router.get('/trail/:vp', function (req, res) {
     var url = "/api/DatawakeData?filter=" + JSON.stringify(filter);
     var encodedUrl = encodeURI(url);
 
-    netHelpers.performAjaxRequest('localhost', 5500, encodedUrl, 'GET', null,function (resultObject) {
+    netHelpers.performLoopbackAjaxRequest(encodedUrl, 'GET', null,function (resultObject) {
         if (resultObject.error) {
             res.status(resultObject.error.status).send(resultObject.error.message);
             return;
@@ -38,7 +38,7 @@ router.get('/trail/:vp', function (req, res) {
 });
 
 router.delete('/:id', function (req, res) {
-    netHelpers.performAjaxRequest('localhost', 5500, '/api/DatawakeData/' + req.params.id, 'DELETE', null,function (resultObject) {
+    netHelpers.performLoopbackAjaxRequest('/api/DatawakeData/' + req.params.id, 'DELETE', null,function (resultObject) {
         if (resultObject.error) {
             res.status(resultObject.error.status).send(resultObject.error.message);
             return;
