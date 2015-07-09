@@ -4,6 +4,26 @@ div.ngdialog(ng-controller="trailEditController").col-md-12
             div.panel.panel-primary
                 div.panel-heading
                     h4 Edit Trail Items for: {{trailName}} &nbsp;&nbsp;&nbsp;
+                        button.inputItem.btn.btn-primary.btn-xs.btn-success(ng-click="showAdd = ! showAdd" title="Import or Add Trail")
+                            .glyphicon.glyphicon-plus-sign(ng-show="!showAdd")
+                            .glyphicon.glyphicon-minus-sign(ng-show="showAdd")
+
+                    div(ng-show='showAdd')
+                        table
+                            form(role="form" name="domainedit")
+                                tr
+                                    th.col-md-4 Trail URL
+                                    th.col-md-2 Trail User
+                                    th.col-md-1 &nbsp;
+                                tr
+                                    td.col-md-2
+                                        input.form-control.span1.required(ng-model='data.url' type="text")
+                                    td.col-md-4
+                                        input.form-control.span1.required(ng-model='data.useremail' type="text")
+                                    td.col-md-1
+                                        button.btn.btn-sm.btn-success(ng-click='addTrailItem()') Add Item
+                                tr
+                                    td &nbsp;
                 div.panel-body
                     div
                         table.table.table-striped.table-condensed.table-hover.ng-table-responsive(ng-table="tableParams" show-filter="false" style="width:90%; height:500px"  export-csv="csv" fixed-header)

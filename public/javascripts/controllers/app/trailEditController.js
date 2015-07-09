@@ -59,9 +59,13 @@ angular.module('NodeWebBase')
         if (!configurationService.isAppConfigured())
             return;
 
+
         $scope.data.id = 0;
-        $scope.data.domainId = $scope.domainId;
-        $scope.data.teamId = $scope.teamId;
+        $scope.data.trailId = $scope.trailId;
+        $scope.data.domainId = $scope.trailDomainId;
+        $scope.data.teamId = $scope.trailTeamId;
+        $scope.data.ts = new Date().toUTCString();
+
 
         $http.post("/datawakedata", $scope.data)
             .success(function (res) {

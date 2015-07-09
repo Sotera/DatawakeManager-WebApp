@@ -133,9 +133,9 @@ div.scrollable.tabs(id="tabs" percent-Height percent="100"  ng-style="style" ng-
             div.tab( id="four.tpl.html" ng-class="{hidden:!isActiveTab('four.tpl.html')}")
                 div.col-md-12(ng-controller="trailTabController")
                     h2 Datawake Trails &nbsp;&nbsp;
-                        //button.inputItem.btn.btn-primary.btn-xs.btn-success(ng-click="showAdd = ! showAdd" title="Import or Add Trail")
-                        //    .glyphicon.glyphicon-plus-sign(ng-show="!showAdd")
-                        //    .glyphicon.glyphicon-minus-sign(ng-show="showAdd")
+                        button.inputItem.btn.btn-primary.btn-xs.btn-success(ng-click="showAdd = ! showAdd" title="Import or Add Trail")
+                            .glyphicon.glyphicon-plus-sign(ng-show="!showAdd")
+                            .glyphicon.glyphicon-minus-sign(ng-show="showAdd")
                         button.inputItem.btn.btn-default.btn-xs.glyphicon.glyphicon-filter(ng-click="showFilters()" title="Toggle Table Filters")
                         button.inputItem.btn.btn-default.btn-xs.glyphicon.glyphicon-refresh(ng-click="getTrails()" title="Refresh Trail List")
                     div
@@ -150,12 +150,12 @@ div.scrollable.tabs(id="tabs" percent-Height percent="100"  ng-style="style" ng-
                                     span(ng-if="!trail.$edit") {{trail.description}}
                                     div(ng-if="trail.$edit")
                                         input.form-control(type="text" ng-model="trail.description" value="{{trail.description}}")
-                                td.col-md-2(data-title="'Domain Name'" sortable="'domainId'" filter="{ 'domainId': 'text' }")
+                                td.col-md-2(data-title="'Domain ID'" sortable="'domainId'" filter="{ 'domainId': 'text' }")
                                     span(ng-if="!trail.$edit") {{trail.domainId}}
                                     div(ng-if="trail.$edit")
                                         select.form-control.span1.required(ng-model='trail.domainId' ng-options="domain.id as domain.name for domain in domain" class="ng-valid ng-dirty")
                                             option(value="{{trail.domainId}}" selected)
-                                td.col-md-2(data-title="'Team Name'" sortable="'teamId'" filter="{ 'teamId': 'text' }")
+                                td.col-md-2(data-title="'Team ID'" sortable="'teamId'" filter="{ 'teamId': 'text' }")
                                     span(ng-if="!trail.$edit") {{trail.teamId}}
                                     div(ng-if="trail.$edit")
                                         select.form-control.span1.required(ng-model='trail.teamId' ng-options="team.id as team.name for team in teams" class="ng-valid ng-dirty")
