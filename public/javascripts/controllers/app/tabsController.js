@@ -16,6 +16,10 @@ angular.module('NodeWebBase')
             title: 'Trails',
             icon: 'glyphicon-road',
             url: 'four.tpl.html'
+        }, {
+            title: 'Settings',
+            icon: 'glyphicon-cog',
+            url: 'five.tpl.html'
         }];
 
 

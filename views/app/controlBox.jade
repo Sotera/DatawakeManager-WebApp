@@ -179,3 +179,32 @@ div.scrollable.tabs(id="tabs" percent-Height percent="100"  ng-style="style" ng-
                                         option(value="" disabled selected) Select Team
                                 td.col-md-2
                                     button.btn.btn-sm.btn-success(ng-controller="trailTabController" ng-click='addTrail()') Add Trail
+
+            div.tab(id="five.tpl.html" ng-class="{hidden:!isActiveTab('five.tpl.html')}")
+                div.col-md-12(ng-controller="settingTabController")
+                    h2 Datawake Settings&nbsp;&nbsp;
+                        button.inputItem.btn.btn-primary.btn-xs.btn-success(ng-click="showAdd = ! showAdd" title="Add New Setting")
+                            .glyphicon.glyphicon-plus-sign(ng-show="!showAdd")
+                            .glyphicon.glyphicon-minus-sign(ng-show="showAdd")
+                        button.inputItem.btn.btn-default.btn-xs.glyphicon.glyphicon-filter(ng-click="showFilters()" title="Toggle Table Filters")
+                        button.inputItem.btn.btn-default.btn-xs.glyphicon.glyphicon-refresh(ng-controller="settingTabController" ng-click="getSettings()" title="Refresh Settings List")
+                    div
+                        table.table.table-striped.table-condensed.table-hover.ng-table-responsive(ng-table="tableParams" show-filter="false")
+                            tr(ng-repeat="set in $data" )
+                                td.col-md-2(data-title="'Setting'" sortable="'setting'" filter="{ 'setting': 'text' }") {{set.setting}}
+
+                                td.col-md-4(data-title="'Value'" sortable="'value'" filter="{ 'value': 'text' }")
+                                    span(ng-if="!set.$edit") {{set.value}}
+                                    div(ng-if="set.$edit")
+                                        input.form-control(type="text" ng-model="set.value" value="{{set.value}}" )
+                                td.col-md-2
+                                    button.inputItem.btn.btn-primary.btn-xs.glyphicon.glyphicon-edit(ng-if="!set.$edit" ng-click="set.$edit=true" title="Edit Setting")
+                                    button.inputItem.btn.btn-success.btn-xs.glyphicon.glyphicon-save(ng-if="set.$edit" ng-click="editSetting(set);set.$edit=false" title="Save Setting")
+                                    button.inputItem.btn.btn-danger.btn-xs.glyphicon.glyphicon-minus-sign(ng-click="removeSetting(set)" title="Remove Setting")
+                            tr(ng-show='showAdd')
+                                td.col-md-2
+                                    input.form-control.span1.required(ng-model='data.setting' placeholder="Setting Name")
+                                td.col-md-2
+                                    input.form-control.span1.required(ng-model='data.value' placeholder="Setting Value")
+                                td.col-md-2
+                                    button.btn.btn-sm.btn-success(ng-controller="settingTabController" ng-click='addSetting()') Add

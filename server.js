@@ -40,9 +40,11 @@ app.use('/teams', require('./routes/app/teams'));
 app.use('/domains', require('./routes/app/domains'));
 app.use('/domainitems', require('./routes/app/domainItems'));
 app.use('/trails', require('./routes/app/trails'));
+app.use('/settings', require('./routes/app/settings'));
 app.use('/datawakeusers', require('./routes/app/datawakeUsers'));
 app.use('/datawakedata', require('./routes/app/datawakeData'));
 app.use('/upload',multipartyMiddleware ,require('./routes/app/upload'));
+
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
