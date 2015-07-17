@@ -22,8 +22,8 @@ div.scrollable.tabs(id="tabs" percent-Height percent="100"  ng-style="style" ng-
                                     span(ng-if="!user.$edit") {{user.email}}
                                     div(ng-if="user.$edit")
                                         input.form-control(type="text" ng-model="user.email" value="{{user.email}}" )
-                                td.col-md-2(data-title="'Team ID'" sortable="'teamId'" filter="{ 'teamId': 'text' }")
-                                    span(ng-if="!user.$edit") {{user.teamId}}
+                                td.col-md-2(data-title="'Team Name'" sortable="'teamName'" filter="{ 'teamName': 'text' }")
+                                    span(ng-if="!user.$edit") {{user.teamName}}
                                     div(ng-if="user.$edit")
                                         select.form-control.span1.required(ng-model='user.teamId' ng-options="team.id as team.name for team in teams" class="ng-valid ng-dirty")
                                             option(value="{{user.teamId}}" selected)
