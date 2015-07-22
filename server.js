@@ -43,6 +43,8 @@ app.use('/trails', require('./routes/app/trails'));
 app.use('/settings', require('./routes/app/settings'));
 app.use('/datawakeusers', require('./routes/app/datawakeUsers'));
 app.use('/datawakedata', require('./routes/app/datawakeData'));
+app.use('/recipients', require('./routes/app/recipients'));
+app.use('/transmissions', require('./routes/app/transmissions'));
 app.use('/upload',multipartyMiddleware ,require('./routes/app/upload'));
 
 

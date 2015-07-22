@@ -29,7 +29,7 @@ div.scrollable.tabs(id="tabs" percent-Height percent="100"  ng-style="style" ng-
                                             option(value="{{user.teamId}}" selected)
                                 td.col-md-2
                                     button.inputItem.btn.btn-primary.btn-xs.glyphicon.glyphicon-edit(ng-if="!user.$edit" ng-click="user.$edit=true" title="Edit User")
-                                    button.inputItem.btn.btn-success.btn-xs.glyphicon.glyphicon-save(ng-if="user.$edit" ng-click="editUser(user);user.$edit=false" title="Save User")
+                                    button.inputItem.btn.btn-success.btn-xs.glyphicon.glyphicon-floppy-save(ng-if="user.$edit" ng-click="editUser(user);user.$edit=false" title="Save User")
                                     button.inputItem.btn.btn-danger.btn-xs.glyphicon.glyphicon-minus-sign(ng-click="removeUser(user)" title="Remove User")
                             tr(ng-show='showAdd')
                                 td.col-md-2
@@ -64,7 +64,7 @@ div.scrollable.tabs(id="tabs" percent-Height percent="100"  ng-style="style" ng-
                                         input.form-control(type="text" ng-model="team.description" value="{{team.description}}")
                                 td.col-md-2
                                     button.inputItem.btn.btn-primary.btn-xs.glyphicon.glyphicon-edit(ng-if="!team.$edit" ng-click="team.$edit=true" title="Edit Team")
-                                    button.inputItem.btn.btn-success.btn-xs.glyphicon.glyphicon-save(ng-if="team.$edit" ng-click="editTeam(team);team.$edit=false" title="Save Team")
+                                    button.inputItem.btn.btn-success.btn-xs.glyphicon.glyphicon-floppy-save(ng-if="team.$edit" ng-click="editTeam(team);team.$edit=false" title="Save Team")
                                     button.inputItem.btn.btn-danger.btn-xs.glyphicon.glyphicon-minus-sign(ng-click="removeTeam(team)" title="Remove Team")
                             tr(ng-show='showAdd')
                                 td.col-md-2
@@ -125,7 +125,7 @@ div.scrollable.tabs(id="tabs" percent-Height percent="100"  ng-style="style" ng-
                                 td.col-md-1
                                     button.inputItem.btn.btn-default.btn-xs.glyphicon.glyphicon-zoom-in(ng-click="openDomainEditor(domain)" title="View domain items")
                                     button.inputItem.btn.btn-primary.btn-xs.glyphicon.glyphicon-edit(ng-if="!domain.$edit" ng-click="domain.$edit=true" title="Edit domain")
-                                    button.inputItem.btn.btn-success.btn-xs.glyphicon.glyphicon-save(ng-if="domain.$edit" ng-click="editDomain(domain);domain.$edit=false" title="Save domain")
+                                    button.inputItem.btn.btn-success.btn-xs.glyphicon.glyphicon-floppy-save(ng-if="domain.$edit" ng-click="editDomain(domain);domain.$edit=false" title="Save domain")
                                     button.inputItem.btn.btn-danger.btn-xs.glyphicon.glyphicon-minus-sign(ng-click="removeDomain(domain)" title="Remove Domain")
 
 
@@ -133,7 +133,7 @@ div.scrollable.tabs(id="tabs" percent-Height percent="100"  ng-style="style" ng-
             div.tab( id="four.tpl.html" ng-class="{hidden:!isActiveTab('four.tpl.html')}")
                 div.col-md-12(ng-controller="trailTabController")
                     h2 Datawake Trails &nbsp;&nbsp;
-                        button.inputItem.btn.btn-primary.btn-xs.btn-success(ng-click="showAdd = ! showAdd" title="Import or Add Trail")
+                        button.inputItem.btn.btn-primary.btn-xs.btn-success(ng-click="showAdd = ! showAdd" title="Add a new Trail")
                             .glyphicon.glyphicon-plus-sign(ng-show="!showAdd")
                             .glyphicon.glyphicon-minus-sign(ng-show="showAdd")
                         button.inputItem.btn.btn-default.btn-xs.glyphicon.glyphicon-filter(ng-click="showFilters()" title="Toggle Table Filters")
@@ -163,7 +163,7 @@ div.scrollable.tabs(id="tabs" percent-Height percent="100"  ng-style="style" ng-
                                 td.col-md-1
                                     button.inputItem.btn.btn-default.btn-xs.glyphicon.glyphicon-zoom-in(ng-click="openTrailEditor(trail)" title="View trail items")
                                     button.inputItem.btn.btn-primary.btn-xs.glyphicon.glyphicon-edit(ng-if="!trail.$edit" ng-click="trail.$edit=true" title="Edit trail")
-                                    button.inputItem.btn.btn-success.btn-xs.glyphicon.glyphicon-save(ng-if="trail.$edit" ng-click="editTrail(trail);trail.$edit=false" title="Save trail")
+                                    button.inputItem.btn.btn-success.btn-xs.glyphicon.glyphicon-floppy-save(ng-if="trail.$edit" ng-click="editTrail(trail);trail.$edit=false" title="Save trail")
                                     button.inputItem.btn.btn-danger.btn-xs.glyphicon.glyphicon-minus-sign(ng-click="removeTrail(trail)" title="Remove trail")
                             tr(ng-show='showAdd')
                                 td.col-md-2
@@ -180,7 +180,91 @@ div.scrollable.tabs(id="tabs" percent-Height percent="100"  ng-style="style" ng-
                                 td.col-md-2
                                     button.btn.btn-sm.btn-success(ng-controller="trailTabController" ng-click='addTrail()') Add Trail
 
-            div.tab(id="five.tpl.html" ng-class="{hidden:!isActiveTab('five.tpl.html')}")
+            div.tab( id="five.tpl.html" ng-class="{hidden:!isActiveTab('five.tpl.html')}")
+                div.col-md-12(ng-controller="recipientTabController")
+                    h2 Datawake Recipients &nbsp;&nbsp;
+                        button.inputItem.btn.btn-primary.btn-xs.btn-success(ng-click="showAdd = ! showAdd" title="Add a new Recipient")
+                            .glyphicon.glyphicon-plus-sign(ng-show="!showAdd")
+                            .glyphicon.glyphicon-minus-sign(ng-show="showAdd")
+                        button.inputItem.btn.btn-default.btn-xs.glyphicon.glyphicon-filter(ng-click="showFilters()" title="Toggle Table Filters")
+                        button.inputItem.btn.btn-default.btn-xs.glyphicon.glyphicon-refresh(ng-click="getRecipients()" title="Refresh Recipient List")
+                    div
+                        table.table.table-striped.table-condensed.table-hover.ng-table-responsive(ng-table="tableParams" show-filter="false")
+                            tr(ng-repeat="recipient in $data" )
+                                td.col-sm-1(data-title="'Recipient ID'" ) {{recipient.recipientId}}
+                                td.col-md-1(data-title="'Recipient'" sortable="'recipientName'" filter="{ 'recipientName': 'text' }")
+                                    span(ng-if="!recipient.$edit") {{recipient.recipientName}}
+                                    div(ng-if="recipient.$edit")
+                                        input.form-control(type="text" ng-model="recipient.recipientName" value="{{recipient.recipientName}}" )
+
+                                td.col-md-1(data-title="'Service Type'" sortable="'serviceType'" filter="{ 'serviceType': 'text' }")
+                                    span(ng-if="!recipient.$edit") {{recipient.serviceType}}
+                                    div(ng-if="recipient.$edit")
+                                        input.form-control(type="text" ng-model="recipient.serviceType" value="{{recipient.serviceType}}" )
+
+                                td.col-md-1(data-title="'Recipient URL'" sortable="'serviceType'" filter="{ 'recipientUrl': 'text' }")
+                                    span(ng-if="!recipient.$edit") {{recipient.recipientUrl}}
+                                    div(ng-if="recipient.$edit")
+                                        input.form-control(type="text" ng-model="recipient.recipientUrl" value="{{recipient.recipientUrl}}" )
+
+                                td.col-md-1(data-title="'Recipient Index'" sortable="'recipientIndex'" filter="{ 'recipientIndex': 'text' }")
+                                    span(ng-if="!recipient.$edit") {{recipient.recipientIndex}}
+                                    div(ng-if="recipient.$edit")
+                                        input.form-control(type="text" ng-model="recipient.recipientIndex" value="{{recipient.recipientIndex}}" )
+
+                                td.col-md-1(data-title="'Credentials'" sortable="'recipientCredentials'" filter="{ 'recipientCredentials': 'text' }")
+                                    span(ng-if="!recipient.$edit") {{recipient.recipientCredentials}}
+                                    div(ng-if="recipient.$edit")
+                                        input.form-control(type="text" ng-model="recipient.recipientCredentials" value="{{recipient.recipientCredentials}}" )
+
+                                td.col-md-1(data-title="'Domain'" sortable="'recipientDomainId'" filter="{ 'recipientDomain': 'text' }")
+                                    span(ng-if="!recipient.$edit") {{recipient.recipientDomain}}
+                                    div(ng-if="recipient.$edit")
+                                        select.form-control.span1.required(ng-model='recipient.recipientDomainId' ng-options="domain.id as domain.name for domain in domains" class="ng-valid ng-dirty")
+                                            option(value="{{recipient.recipientDomainId}}" selected)
+
+                                td.col-md-1(data-title="'Team'" sortable="'recipientTeam'" filter="{ 'recipientTeam': 'text' }")
+                                    span(ng-if="!recipient.$edit") {{recipient.recipientTeam}}
+                                    div(ng-if="recipient.$edit")
+                                        select.form-control.span1.required(ng-model='recipient.recipientTeamId' ng-options="team.id as team.name for team in teams" class="ng-valid ng-dirty")
+                                            option(value="{{recipient.recipientTeamId}}" selected)
+
+                                td.col-md-1(data-title="'Trail'" sortable="'recipientTrail'" filter="{ 'recipientTrail': 'text' }")
+                                    span(ng-if="!recipient.$edit") {{recipient.recipientTrail}}
+                                    div(ng-if="recipient.$edit")
+                                        select.form-control.span1.required(ng-model='recipient.recipientTrailId' ng-options="trail.id as trail.name for trail in trails" class="ng-valid ng-dirty")
+                                            option(value="{{recipient.recipientTrailId}}" selected)
+
+                                td.col-md-1
+                                    button.inputItem.btn.btn-default.btn-xs.glyphicon.glyphicon-zoom-in(ng-click="openTransmissionViewer(recipient)" title="View Transmissions")
+                                    button.inputItem.btn.btn-primary.btn-xs.glyphicon.glyphicon-edit(ng-if="!recipient.$edit" ng-click="recipient.$edit=true" title="Edit Transmission")
+                                    button.inputItem.btn.btn-success.btn-xs.glyphicon.glyphicon-floppy-save(ng-if="recipient.$edit" ng-click="editRecipient(recipient);recipient.$edit=false" title="Save Recipient")
+                                    button.inputItem.btn.btn-danger.btn-xs.glyphicon.glyphicon-minus-sign(ng-click="removeRecipient(recipient)" title="Remove Recipient")
+                            tr(ng-show='showAdd')
+                                td.col-md-1
+                                td.col-md-1
+                                    input.form-control.span1.required(ng-model='data.recipientName')
+                                td.col-md-1
+                                    input.form-control.span1.required(ng-model='data.serviceType')
+                                td.col-md-1
+                                    input.form-control.span1.required(ng-model='data.recipientUrl')
+                                td.col-md-1
+                                    input.form-control.span1.required(ng-model='data.recipientIndex')
+                                td.col-md-1
+                                    input.form-control.span1.required(ng-model='data.credentials')
+                                td.col-md-1
+                                    select.form-control.span1.required(ng-model='data.recipientDomainId' ng-options="domain.id as domain.name for domain in domains" class="ng-valid ng-dirty")
+                                        option(value="" disabled selected) Select Domain
+                                td.col-md-1
+                                    select.form-control.span1.required(ng-model='data.recipientTeamId' ng-options="team.id as team.name for team in teams" class="ng-valid ng-dirty")
+                                        option(value="" disabled selected) Select Team
+                                td.col-md-1
+                                    select.form-control.span1.required(ng-model='data.recipientTrailId' ng-options="trail.id as trail.name for trail in trails" class="ng-valid ng-dirty")
+                                        option(value="" disabled selected) Select Team
+                                td.col-md-1
+                                    button.btn.btn-sm.btn-success(ng-controller="recipientTabController" ng-click='addRecipient()') Add Recipient
+
+            div.tab(id="six.tpl.html" ng-class="{hidden:!isActiveTab('six.tpl.html')}")
                 div.col-md-12(ng-controller="settingTabController")
                     h2 Datawake Settings&nbsp;&nbsp;
                         button.inputItem.btn.btn-primary.btn-xs.btn-success(ng-click="showAdd = ! showAdd" title="Add New Setting")
@@ -199,7 +283,7 @@ div.scrollable.tabs(id="tabs" percent-Height percent="100"  ng-style="style" ng-
                                         input.form-control(type="text" ng-model="set.value" value="{{set.value}}" )
                                 td.col-md-2
                                     button.inputItem.btn.btn-primary.btn-xs.glyphicon.glyphicon-edit(ng-if="!set.$edit" ng-click="set.$edit=true" title="Edit Setting")
-                                    button.inputItem.btn.btn-success.btn-xs.glyphicon.glyphicon-save(ng-if="set.$edit" ng-click="editSetting(set);set.$edit=false" title="Save Setting")
+                                    button.inputItem.btn.btn-success.btn-xs.glyphicon.glyphicon-floppy-save(ng-if="set.$edit" ng-click="editSetting(set);set.$edit=false" title="Save Setting")
                                     button.inputItem.btn.btn-danger.btn-xs.glyphicon.glyphicon-minus-sign(ng-click="removeSetting(set)" title="Remove Setting")
                             tr(ng-show='showAdd')
                                 td.col-md-2

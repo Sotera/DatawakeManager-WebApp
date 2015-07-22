@@ -1,25 +1,29 @@
 angular.module('NodeWebBase')
     .controller('tabsController', function ($scope, $http) {
         $scope.tabs = [{
-            title: 'Users',
+            title: ' Users',
             icon: 'glyphicon-user',
             url: 'one.tpl.html'
         }, {
-            title: 'Teams',
+            title: ' Teams',
             icon: 'glyphicon-th-large',
             url: 'two.tpl.html'
         }, {
-            title: 'Domains',
+            title: ' Domains',
             icon: 'glyphicon-file',
             url: 'three.tpl.html'
         }, {
-            title: 'Trails',
+            title: ' Trails',
             icon: 'glyphicon-road',
             url: 'four.tpl.html'
         }, {
-            title: 'Settings',
-            icon: 'glyphicon-cog',
+            title: ' Recipients',
+            icon: 'glyphicon-send',
             url: 'five.tpl.html'
+        }, {
+            title: ' Settings',
+            icon: 'glyphicon-cog',
+            url: 'six.tpl.html'
         }];
 
 
