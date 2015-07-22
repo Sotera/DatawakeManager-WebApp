@@ -1,0 +1,23 @@
+div.ngdialog(ng-controller="transmissionEditController").col-md-12
+    div.ngdialog-overlay
+        div.ngdialog-content
+            div.panel.panel-primary
+                div.panel-heading
+                    h4 View Transmissions for Recipient: {{recipientName}} &nbsp;&nbsp;&nbsp;
+
+                div.panel-body
+                    div
+                        table.table.table-striped.table-condensed.table-hover.ng-table-responsive(ng-table="tableParams" show-filter="false" style="width:90%; height:500px"  export-csv="csv" fixed-header)
+                            tr(ng-repeat="transmission in transmissionItems")
+                                td.col-md-2(data-title="'Service Type'" sortable="'serviceType'" filter="{ 'serviceType': 'text' }") {{transmission.serviceType }}
+                                td.col-md-2(data-title="'Status'" sortable="'status'" filter="{ 'status': 'text' }") {{transmission.status }}
+                                td.col-md-2(data-title="'Transmitted'" sortable="'timestamp'" filter="{ 'timestamp': 'text' }") {{transmission.timestamp}}
+                                td.col-md-2(data-title="'Domain'" sortable="'domainName'" filter="{ 'domainName': 'text' }") {{transmission.domainName}}
+                                td.col-md-2(data-title="'Trail'" sortable="'trailName'" filter="{ 'trailName': 'text' }") {{transmission.trailName}}
+                                td.col-md-2(data-title="'Team'" sortable="'teamName'" filter="{ 'teamName': 'text' }") {{transmission.teamName }}
+
+                    div.col-md-8.col-md-offset-4
+                        div.btn-group-xs
+                            a.btn.btn-default(ng-click="close()" title="Close")
+                                i.glyphicon.glyphicon-remove &#160;Close
+
