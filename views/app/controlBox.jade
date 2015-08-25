@@ -202,17 +202,22 @@ div.scrollable.tabs(id="tabs" percent-Height percent="100"  ng-style="style" ng-
                                     div(ng-if="recipient.$edit")
                                         input.form-control(type="text" ng-model="recipient.serviceType" value="{{recipient.serviceType}}" )
 
-                                td.col-md-1(data-title="'Recipient URL'" sortable="'serviceType'" filter="{ 'recipientUrl': 'text' }")
+                                td.col-md-1(data-title="'Remote Protocol'" sortable="'protocol'" filter="{ 'protocol': 'text' }")
+                                    span(ng-if="!recipient.$edit") {{recipient.protocol}}
+                                    div(ng-if="recipient.$edit")
+                                        input.form-control(type="text" ng-model="recipient.protocol" value="{{recipient.protocol}}" )
+                                        
+                                td.col-md-1(data-title="'Remote URL'" sortable="'recipientUrl'" filter="{ 'recipientUrl': 'text' }")
                                     span(ng-if="!recipient.$edit") {{recipient.recipientUrl}}
                                     div(ng-if="recipient.$edit")
                                         input.form-control(type="text" ng-model="recipient.recipientUrl" value="{{recipient.recipientUrl}}" )
 
-                                td.col-md-1(data-title="'Recipient Index'" sortable="'recipientIndex'" filter="{ 'recipientIndex': 'text' }")
+                                td.col-md-1(data-title="'Remote Index'" sortable="'recipientIndex'" filter="{ 'recipientIndex': 'text' }")
                                     span(ng-if="!recipient.$edit") {{recipient.recipientIndex}}
                                     div(ng-if="recipient.$edit")
                                         input.form-control(type="text" ng-model="recipient.recipientIndex" value="{{recipient.recipientIndex}}" )
 
-                                td.col-md-1(data-title="'Credentials'" sortable="'recipientCredentials'" filter="{ 'recipientCredentials': 'text' }")
+                                td.col-md-1(data-title="'Remote Credentials'" sortable="'recipientCredentials'" filter="{ 'recipientCredentials': 'text' }")
                                     span(ng-if="!recipient.$edit") {{recipient.recipientCredentials}}
                                     div(ng-if="recipient.$edit")
                                         input.form-control(type="text" ng-model="recipient.recipientCredentials" value="{{recipient.recipientCredentials}}" )
@@ -246,6 +251,8 @@ div.scrollable.tabs(id="tabs" percent-Height percent="100"  ng-style="style" ng-
                                     input.form-control.span1.required(ng-model='data.recipientName')
                                 td.col-md-1
                                     input.form-control.span1.required(ng-model='data.serviceType')
+                                td.col-md-1
+                                    input.form-control.span1.required(ng-model='data.protocol')
                                 td.col-md-1
                                     input.form-control.span1.required(ng-model='data.recipientUrl')
                                 td.col-md-1
