@@ -64,6 +64,7 @@ angular.module('NodeWebBase')
                     changeRecipientMsg.broadcast();
                     $scope.data.recipientName = '';
                     $scope.data.serviceType = '';
+                    $scope.data.recipientProtocol = '';
                     $scope.data.recipientUrl = '';
                     $scope.data.recipientIndex = '';
                     $scope.data.credentials = '';
